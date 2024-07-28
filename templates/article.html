@@ -72,56 +72,27 @@
     <main class="main-article" role="main">
 
       <article class="article">
+          <h2>{{ article.title }}</h2>
+          <p><small>{{ article.date }}</small><br> By {{ article.author }}</p>
 
-        <h2>Laborum Delectus numquam Soluta ratione</h2>
-        <p><small>Tuesday, Sept. 17, 16:15h</small><br> By AP Agency</p>
+          <div class="headline"></div>
 
-        <div class="headline"></div>
+          {% for paragraph in article.content.split('\n\n') %}
+              <p>{{ paragraph }}</p>
+          {% endfor %}
 
-        <p class="intro-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, nemo quo inventore,
-          maxime iure consectetur adipisicing elit. Quo quasi enim praesentium tenetur quam,
-          consequuntur quisquam officia itaque. Fuga aperiam tempore neque</p>
+          <figure>
+              <img src="/static/images/world5.jpg" alt="Bridge night image">
+              <figcaption>Pellentesque nec viverra felis</figcaption>
+          </figure>
 
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis enim aliquid recusandae dolore beatae
-          consequuntur odit vero. Nihil, veniam laborum</p>
+          <figure>
+              <img src="/static/images/world10.jpg" alt="Bridge night image">
+              <figcaption>Nam egestas enim vestibulum</figcaption>
+          </figure>
+      </article>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo quasi enim praesentium tenetur quam,
-          consequuntur quisquam officia itaque. Fuga aperiam tempore neque, qui facere distinctio nisi illum minus iure!
-          Ullam enim expedita qui beatae voluptatibus ex non possimus ea doloribus.</p>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates rem accusamus at adipisci ipsum dolore
-        </p>
-
-        <figure>
-          <img src="/static/images/world5.jpg" alt="Bridge night image">
-          <figcaption>Pellentesque nec viverra felis</figcaption>
-        </figure>
-
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, ex!</p>
-
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis laudantium repellat molestias soluta
-          tempore ab quo facilis provident doloremque debitis.</p>
-
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad officiis nihil perspiciatis odio fugit
-          asperiores! Eveniet beatae, quaerat repudiandae voluptatum ut, doloribus quas blanditiis non voluptatem magni
-          autem molestiae sequi iusto voluptas eius repellendus, mollitia fugiat quasi enim soluta ex!</p>
-
-        <figure>
-          <img src="/static/images/world10.jpg" alt="Bridge night image">
-          <figcaption>Nam egestas enim vestibulum</figcaption>
-        </figure>
-
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione quis eius facilis rerum exercitationem
-          culpa.</p>
-
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum, optio eos itaque ratione culpa placeat
-          molestias, voluptates sed dolorem eveniet libero laudantium hic. Velit, esse magni! Voluptatum nostrum
-          exercitationem quibusdam.</p>
-
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi molestiae illum recusandae exercitationem
-          voluptatum pariatur omnis animi. Deserunt maxime alias veritatis mollitia fugiat velit blanditiis dolores
-          facere quaerat odio! Laboriosam inventore voluptatum itaque corporis dolorum explicabo suscipit provident
-          aperiam expedita.</p>
+  </main>
 
         <!-- Comments -->
         <div class="comments">
