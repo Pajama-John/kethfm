@@ -20,7 +20,7 @@ def article1():
 #This allows you to change the image on the main Breaking News article
 @app.route('/breakingnewsimage')
 def breakingnewsimage():
-    return send_from_directory(app.static_folder, "images/ThumbnailH3SHow2.jpg")
+    return send_from_directory(app.static_folder, "images/h3show1thumbnail.png")
 
 # Generate new article page
 @app.route('/submit')
