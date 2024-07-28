@@ -800,7 +800,7 @@ input[type='submit'] {
   }
 
   .article p:first-of-type {
-    padding-bottom: 50px;
+    padding-bottom: 0px;
     padding-left: 0;
   }
 

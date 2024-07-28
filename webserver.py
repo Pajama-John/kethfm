@@ -1,5 +1,6 @@
-from flask import Flask, render_template, send_from_directory, redirect, url_for, request
+from flask import Flask, render_template, send_from_directory, redirect, url_for, request, abort
 import os
+import re
 import json
 
 app = Flask(__name__)
@@ -7,6 +8,10 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template("index.html")
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(app.static_folder, "images/favicon.jpg")
 
 @app.route('/article1')
 def article1():
@@ -22,21 +27,28 @@ def breakingnewsimage():
 def submit():
     return render_template('create_article.html')
 
+def hyperlink_urls(text):
+    url_pattern = re.compile(r'(https?://\S+)')
+    return url_pattern.sub(r'<a href="\1">\1</a>', text)
+
+app.jinja_env.filters['hyperlink'] = hyperlink_urls
+
 @app.route('/submit_article', methods=['POST'])
 def submit_article():
     title = request.form['title']
     author = request.form['author']
     date = request.form['date']
     content = request.form['content']
-    
+    youtube = request.form['youtube']
     link = '/article/' + title.replace(' ', '-').lower()
-    
+
     article = {
         'title': title,
+        'link': link,
         'author': author,
         'date': date,
-        'link': link,
-        'content': content
+        'content': content,
+        'youtube': youtube
     }
     
     # Save the article as a JSON file

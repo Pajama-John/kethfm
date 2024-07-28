@@ -9,8 +9,9 @@
   <meta name="author" content="dukibu">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>World | Frivizn News</title>
+  <title>{{ article.title }}</title>
 
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700|Open+Sans&display=swap" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -28,7 +29,7 @@
       <section class="nav-section">
         <!-- Logo -->
         <div class="logo">
-          <a href="index.html" title="Frivizn logo">Frivizn</a>
+          <a href="/" title="KETH Logo">KETH FM</a>
         </div>
 
         <!-- Navigation -->
@@ -67,25 +68,24 @@
     <main class="main-article" role="main">
 
       <article class="article">
-          <h2>{{ article.title }}</h2>
-          <p><small>{{ article.date }}</small><br> By {{ article.author }}</p>
+        <h2>{{ article.title }}</h2>
+        <p><small>{{ article.date }}</small><br> By {{ article.author }}</p>
 
-          <div class="headline"></div>
+        {% if article.youtube %}
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ article.youtube.split('v=')[-1] }}" frameborder="0" allowfullscreen></iframe>
+            </div><br>
+        {% else %}
+            <figure>
+                <img src="/static/images/world5.jpg" alt="Bridge night image">
+                <figcaption>Pellentesque nec viverra felis</figcaption>
+            </figure>
+        {% endif %}
 
-          <div class="article-content">
-              {{ article.content | replace('\n\n', '</p><p>') | replace('\n', '<br>') | safe }}
-          </div>
-
-          <figure>
-              <img src="/static/images/world5.jpg" alt="Bridge night image">
-              <figcaption>Pellentesque nec viverra felis</figcaption>
-          </figure>
-
-          <figure>
-              <img src="/static/images/world10.jpg" alt="Bridge night image">
-              <figcaption>Nam egestas enim vestibulum</figcaption>
-          </figure>
-      </article>
+        <div class="article-content">
+            {{ article.content | replace('\n\n', '</p><p>') | replace('\n', '<br>') | hyperlink | safe }}
+        </div>
+</article>
 
   </main>
 
