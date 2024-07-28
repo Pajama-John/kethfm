@@ -29,10 +29,13 @@ def submit_article():
     date = request.form['date']
     content = request.form['content']
     
+    link = '/article/' + title.replace(' ', '-').lower()
+    
     article = {
         'title': title,
         'author': author,
         'date': date,
+        'link': link,
         'content': content
     }
     
@@ -45,7 +48,7 @@ def submit_article():
     global articles
     articles = load_articles()
     
-    return redirect("/")
+    return redirect(link)
 
 
 # Code for handling and serving articles
