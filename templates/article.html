@@ -22,11 +22,6 @@
 <body>
 
   <div class="content-wrap">
-
-    <!--[if IE]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-
     <!-- Header -->
     <header role="banner">
 
@@ -77,9 +72,9 @@
 
           <div class="headline"></div>
 
-          {% for paragraph in article.content.split('\n\n') %}
-              <p>{{ paragraph }}</p>
-          {% endfor %}
+          <div class="article-content">
+              {{ article.content | replace('\n\n', '</p><p>') | replace('\n', '<br>') | safe }}
+          </div>
 
           <figure>
               <img src="/static/images/world5.jpg" alt="Bridge night image">
@@ -94,62 +89,6 @@
 
   </main>
 
-        <!-- Comments -->
-        <div class="comments">
-
-          <p><a href="#">Comments(4)</a></p>
-          <h4>Top Comments</h4>
-          <p class="comment-name">johndoe123</p>
-          <div class="comment-text">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam excepturi architecto inventore
-              blanditiis eum quos distinctio, perspiciatis ratione doloribus, velit facilis illum quisquam at libero
-              voluptate officia corrupti? Amet.</p>
-            <p><small>Replies(1)</small></p>
-          </div>
-
-          <p class="comment-name">janesmith</p>
-          <div class="comment-text">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam excepturi architecto inventore
-              blanditiis eum quos distinctio, perspiciatis ratione doloribus, velit facilis illum quisquam at libero
-              voluptate officia corrupti? Amet.</p>
-            <p><small>Replies(4)</small></p>
-          </div>
-
-          <p class="comment-name">paul223</p>
-          <div class="comment-text">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam excepturi architecto inventore
-              blanditiis eum quos distinctio, perspiciatis ratione doloribus, velit facilis illum quisquam at libero
-              voluptate officia corrupti? Amet.</p>
-            <p><small>Replies(3)</small></p>
-          </div>
-
-          <p class="comment-name">olivia1980</p>
-          <div class="comment-text">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dicta ipsam excepturi architecto inventore
-              blanditiis eum quos distinctio, perspiciatis ratione doloribus, velit facilis illum quisquam at libero
-              voluptate officia corrupti? Amet.</p>
-            <p><small>Replies(2)</small></p>
-          </div>
-
-        </div> <!-- End of class="comments" -->
-
-
-        <!-- Comment Form -->
-        <h3>Comment Form</h3>
-
-        <div class="form-container">
-          <form action="index.php">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Your name..">
-
-            <label for="comment">Comment</label>
-            <textarea id="comment" name="comment" placeholder="Your comment.." style="height:200px"></textarea>
-
-            <input type="submit" value="Submit">
-          </form>
-        </div> <!-- End of  class="form-container" -->
-
-      </article> <!-- End of  class="article" -->
 
       <!-- Sidebar -->
       <aside class="sidebar" role="complementary">
