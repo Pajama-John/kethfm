@@ -214,7 +214,7 @@ img {
    ------------------------------------------------------------- */
 
 .headline {
-  background: url(../images/politics8.jpg);
+  background: url(/breakingnewsimage);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -679,7 +679,7 @@ input[type='submit'] {
 
   .nav-section {
     display: flex;
-    background: hsl(0, 0%, 15%);
+    background: hsl(274.63deg 23.93% 45.88%);
     justify-content: space-between;
     align-items: center;
     margin-left: 10px;
