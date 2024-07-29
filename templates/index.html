@@ -76,7 +76,7 @@
       <div class="top-news">
 
         <section class="latest-news">
-          <div class="headline">
+          <div class="headline" id="headline-div">
             <p>Breaking News</p>
             <a href="article/the-h3-podcast-is-back!-with-a-new-look">
               <h1>The H3 Podcast is Back! With a New Look</h1>
@@ -466,6 +466,11 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="/static/js/main.js"></script>
+  <script>
+  document.getElementById('headline-div').addEventListener('click', function() {
+    window.location.href = 'article/the-h3-podcast-is-back!-with-a-new-look';
+  });
+  </script>
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <!--
