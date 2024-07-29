@@ -66,7 +66,6 @@
 
     <!-- Main -->
     <main class="main-article" role="main">
-
       <article class="article">
         <h2>{{ article.title }}</h2>
         <p><small>{{ article.date }}</small><br> By {{ article.author }}</p>
@@ -75,6 +74,11 @@
             <div class="video-container">
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ article.youtube.split('v=')[-1] }}" frameborder="0" allowfullscreen></iframe>
             </div><br>
+        {% elif article.thumbnail %}
+            <figure>
+                <img src="{{ url_for('static', filename=article.thumbnail.split('static/')[-1]) }}" alt="Thumbnail Image">
+                <figcaption>{{ article.title }}</figcaption>
+            </figure>
         {% else %}
             <figure>
                 <img src="/static/images/world5.jpg" alt="Bridge night image">
@@ -85,9 +89,8 @@
         <div class="article-content">
             {{ article.content | replace('\n\n', '</p><p>') | replace('\n', '<br>') | hyperlink | safe }}
         </div>
-</article>
-
-  </main>
+    </article>
+</main>
 
 
       <!-- Sidebar -->

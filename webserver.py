@@ -2,8 +2,10 @@ from flask import Flask, render_template, send_from_directory, redirect, url_for
 import os
 import re
 import json
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 
 @app.route('/')
 def home():
@@ -40,6 +42,7 @@ def submit_article():
     date = request.form['date']
     content = request.form['content']
     youtube = request.form['youtube']
+    thumbnail = request.files.get('thumbnail')  # Use .get to avoid KeyError
     link = '/article/' + title.replace(' ', '-').lower()
 
     article = {
@@ -48,8 +51,16 @@ def submit_article():
         'author': author,
         'date': date,
         'content': content,
-        'youtube': youtube
+        'youtube': youtube,
+        'thumbnail': ''
     }
+    
+    if thumbnail and thumbnail.filename != '':
+        filename = secure_filename(thumbnail.filename)
+        thumbnail_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        thumbnail.save(thumbnail_path)
+        article['thumbnail'] = thumbnail_path.replace('\\', '/')
+
     
     # Save the article as a JSON file
     filename = title.replace(' ', '-').lower() + '.json'
