@@ -29,22 +29,6 @@ def favicon():
 def article1():
     return render_template("article.html")
 
-#This allows you to change the image on the main Breaking News article
-@app.route('/breakingnewsimage')
-def breakingnewsimage():
-    featured_path = os.path.join('data', 'featured.json')
-
-    if os.path.exists(featured_path):
-        with open(featured_path, 'r') as f:
-            featured_article = json.load(f)
-            thumbnail_path = featured_article.get('thumbnail')
-            if thumbnail_path and os.path.exists(thumbnail_path):
-                directory, filename = os.path.split(thumbnail_path)
-                return send_from_directory(directory, filename)
-
-    # Fallback to default image if no featured image is set
-    return send_from_directory(app.static_folder, "images/h3show1thumbnail.png")
-
 # Generate new article page
 @app.route('/submit')
 def submit():
@@ -55,6 +39,29 @@ def hyperlink_urls(text):
     return url_pattern.sub(r'<a href="\1">\1</a>', text)
 
 app.jinja_env.filters['hyperlink'] = hyperlink_urls
+
+def latest_episode_section():
+    
+
+#This allows you to change the image on the main Breaking News article
+@app.route('/breakingnewsimage')
+def breakingnewsimage():
+    featured_path = os.path.join('data', 'featured.json')
+
+    if os.path.exists(featured_path):
+        print("exists")
+        with open(featured_path, 'r') as f:
+            featured_article = json.load(f)
+            thumbnail_path = featured_article.get('thumbnail')
+            print(thumbnail_path)
+            if thumbnail_path and os.path.exists(thumbnail_path):
+                return send_from_directory(app.config['UPLOAD_FOLDER'], os.path.basename(thumbnail_path))
+
+    # Fallback to default image if no featured image is set
+    print("Fallback image used")
+    return send_from_directory(app.static_folder, "images/middle-finger-emoji-1368x2048-03zmpcju.png")
+
+
 
 @app.route('/submit_article', methods=['POST'])
 def submit_article():
@@ -119,7 +126,9 @@ def submit_featured():
     articles = []
 
     for filename in os.listdir(data_folder):
-        if filename.endswith('.json'):
+        if filename == "featured.json":
+            continue
+        elif filename.endswith('.json'):
             filepath = os.path.join(data_folder, filename)
             with open(filepath, 'r') as f:
                 article = json.load(f)

@@ -3,3 +3,4 @@ kethfmenv/
 static/uploads/*
 data/*.json
 test.py
+sections.py

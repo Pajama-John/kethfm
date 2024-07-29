@@ -2,42 +2,28 @@
 <html class="no-js" lang="en">
 
 <head>
-
   <meta charset="UTF-8">
   <meta name="description"
     content="The latest international news from Frivizn, featuring top stories from around the world and breaking news, as it happens.">
   <meta name="author" content="dukibu">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>KETH Los Angeles</title>
-
   <link rel="icon" href="/static/images/favicon.png" type="image/png">
   <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700|Open+Sans&display=swap" rel="stylesheet">
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="/static/css/normalize.css">
   <link rel="stylesheet" href="/static/css/main.css">
-
 </head>
 
 <body id="top">
-
   <div class="content-wrap">
-
-    <!--[if IE]>
-      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-    <![endif]-->
-
-    <!-- Header -->
     <header role="banner">
-
       <section class="nav-section">
-
         <!-- Logo -->
         <div class="logo">
           <a href="https://www.youtube.com/@H3Podcast" title="Watch the H3 Show!"><img style="max-height: 150px" src="/static/images/KETHLOGO.png"/></a>
         </div>
-
         <!-- Navigation -->
         <nav class="nav-menu" role="navigation">
           <ul class="nav-links">
@@ -67,30 +53,19 @@
           </div>
         </nav>
       </section> <!-- end of class="nav-section"-->
-
     </header>
-
     <!-- Main -->
     <main class="main" role="main">
-
       <div class="top-news">
-
         <section class="latest-news">
           <div class="headline" id="headline-div">
-              <p>Breaking News</p>
-              {% if featured_article %}
-                  <a href="{{ featured_article['link'] }}">
-                      <h1>{{ featured_article['title'] }}</h1>
-                  </a>
-              {% else %}
-                  <a href="article/the-h3-podcast-is-back!-with-a-new-look">
-                      <h1>The H3 Podcast is Back! With a New Look</h1>
-                      <img src="{{ url_for('static', filename='images/h3show1thumbnail.png') }}" alt="Default Image">
-                  </a>
-              {% endif %}
+          <p>Breaking News</p>
+            <a href="{{ featured_article['link'] }}">
+              <h1>{{ featured_article['title'] }}</h1>
+            </a>
           </div>
-      </section> <!-- End of class="latest-news" -->    
-        <section class="top-stories">
+        </section> <!-- End of class="latest-news" -->
+          <section class="top-stories">
           <h2>Latest Episode:</h2>
           <div class="headline headline-1">
             <a href="#">
@@ -109,9 +84,7 @@
             </a>
           </div>
         </section> <!-- End of class="top-stories" -->
-
       </div> <!-- End of class="top-news" -->
-
       <section class="world">
         <h2>Top stories of This Week</h2>
         <div class="story story-1">
@@ -125,7 +98,6 @@
             </div>
           </a>
         </div>
-
         <div class="story story-2">
           <a href="#">
             <div class="story-img">
@@ -137,7 +109,6 @@
             </div>
           </a>
         </div>
-
         <div class="story story-3">
           <a href="#">
             <div class="story-img">
@@ -150,7 +121,6 @@
           </a>
         </div>
       </section> <!-- End of class="world" -->
-
       <section class="politics">
         <h2>Politics</h2>
         <div class="story">
@@ -164,7 +134,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -176,7 +145,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -188,7 +156,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -201,7 +168,6 @@
           </a>
         </div>
       </section> <!-- End of class="politics" -->
-
       <section class="business">
         <h2>Business</h2>
         <div class="story">
@@ -215,7 +181,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -227,7 +192,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -239,7 +203,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -252,7 +215,6 @@
           </a>
         </div>
       </section> <!-- End of class="business" -->
-
       <section class="sport">
         <h2>Sport</h2>
         <div class="story">
@@ -266,7 +228,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -278,7 +239,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -290,7 +250,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -303,7 +262,6 @@
           </a>
         </div>
       </section> <!-- End of class="sport" -->
-
       <section class="entertainment">
         <h2>Entertainment</h2>
         <div class="story">
@@ -317,7 +275,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -329,7 +286,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -341,7 +297,6 @@
             </div>
           </a>
         </div>
-
         <div class="story">
           <a href="#">
             <div class="story-img">
@@ -354,7 +309,6 @@
           </a>
         </div>
       </section> <!-- End of class="entertainment" -->
-
       <section class="more">
         <h2>More...</h2>
         <a href="#">
@@ -363,64 +317,52 @@
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>pretium ac purus at, pretium dapibus velit</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>Sed ac elit posuere, cursus risus porttitor</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>Nam egestas, enim a lobortis vestibulum</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>Ligula massa commodo nulla, nec convallis arcu risus</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>Vestibulum dapibus, risus vel condimentum porta</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>a condimentum est nisl sed felis</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
         <a href="#">
           <div class="more-headline">
             <h3>Nullam rhoncus tincidunt felis at auctor donec</h3>
             <p class="exact-time">13:53h</p>
           </div>
         </a>
-
       </section> <!-- End of class="more" -->
-
     </main> <!-- End of class="main" -->
-
-
     <!-- Footer Links -->
     <div class="footer-links">
-
       <ul class="social-media-links">
         <li><a href="http://twitter.com"><span class="screen-reader-text">Twitter</span></a></li>
         <li><a href="http://facebook.com"><span class="screen-reader-text">Facebook</span></a></li>
@@ -428,7 +370,6 @@
         <li><a href="http://youtube.com"><span class="screen-reader-text">YouTube</span></a></li>
         <li><a href="http://instagram.com"><span class="screen-reader-text">Instagram</span></a></li>
       </ul>
-
       <ul class="main-footer-links">
         <li><a href="#world" title="World">World</a>
         <li><a href="#politics" title="Politics">Politics</a></li>
@@ -442,7 +383,6 @@
         <li><a href="#weather" title="Weather">Weather</a></li>
         <li><a href="#video" title="Video">Video</a></li>
       </ul>
-
       <ul class="info-links">
         <li><a href="#terms-of-use" title="Terms of Use">Terms of Use</a></li>
         <li><a href="#privacy-policy" title="Privacy Policy">Privacy Policy</a></li>
@@ -450,24 +390,19 @@
         <li><a href="#advertising" title="Advertising">Advertising</a></li>
         <li><a href="#sitemap" title="Sitemap">Sitemap</a></li>
       </ul>
-
       <ul class="our-address">
         <li>Our Address:</li>
         <li>Main Street 123</li>
         <li>New York, NY 10000</li>
         <li>111-222-3333</li>
       </ul>
-
     </div> <!-- End of class="footer-links" -->
-
     <!-- Footer Credit -->
     <footer role="contentinfo">
       <p>2019 &copy; by Frivizn Studio</p>
       <a class="scroll-top" href="#top"></a>
     </footer>
-
   </div> <!-- end of class="content-wrap" -->
-
   <!-- <script src="/static/js/modernizr.js"></script> -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -477,16 +412,5 @@
     window.location.href = 'article/the-h3-podcast-is-back!-with-a-new-look';
   });
   </script>
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <!--
-      <script>
-        window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
-      </script>
-      <script src="https://www.google-analytics.com/analytics.js" async defer></script> 
-    -->
-
 </body>
-
 </html>
