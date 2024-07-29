@@ -65,22 +65,21 @@
             </a>
           </div>
         </section> <!-- End of class="latest-news" -->
-          <section class="top-stories">
+        <section class="top-stories">
           <h2>Latest Episode:</h2>
-          <div class="headline headline-1">
-            <a href="#">
-              <h1>Ethan Does Something</h1>
+          <div class="headline headline-1" style="background-image: url('{{ articles[latest_articles['article1']]['thumbnail'] }}');">
+            <a href="{{ url_for('article', title=latest_articles['article1'])[:-5] }}">
+              <h1>{{ articles[latest_articles['article1']]['title'] }}</h1>
             </a>
           </div>
-          <div class="headline headline-2">
-            <a href="#">
-              <h1>The Crew Plays a Game</h1>
+          <div class="headline headline-2" style="background-image: url('{{ articles[latest_articles['article2']]['thumbnail'] }}');">
+            <a href="{{ url_for('article', title=latest_articles['article2'])[:-5] }}">
+              <h1>{{ articles[latest_articles['article2']]['title'] }}</h1>
             </a>
           </div>
-
-          <div class="headline headline-3">
-            <a href="#">
-              <h1>Boogie Offs Himself</h1>
+          <div class="headline headline-3" style="background-image: url('{{ articles[latest_articles['article3']]['thumbnail'] }}');">
+            <a href="{{ url_for('article', title=latest_articles['article3'])[:-5] }}">
+              <h1>{{ articles[latest_articles['article3']]['title'] }}</h1>
             </a>
           </div>
         </section> <!-- End of class="top-stories" -->

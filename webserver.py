@@ -6,20 +6,44 @@ import os
 import re
 import json
 import shutil
+import pickle
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
+
+def latest_episode_section():
+    with open("data/latest.pickle", "rb") as f:
+        latest = pickle.load(f)
+    return latest
+
+@app.route('/submit-latest')
+def latest():
+    articles = load_articles()
+    return render_template("latest_form.html", articles=articles)
+
+@app.route('/set-latest', methods=['POST'])
+def set_latest():
+    latest_articles = dict(request.form)
+    with open("data/latest.pickle", "wb") as f:
+        pickle.dump(latest_articles, f)
+    return redirect("/")
 
 @app.route('/')
 def home():
     featured_article = None
     featured_path = os.path.join('data', 'featured.json')
 
+    # Load latest articles
+    latest_articles = latest_episode_section()
+    
     if os.path.exists(featured_path):
         with open(featured_path, 'r') as f:
             featured_article = json.load(f)
-
-    return render_template("index.html", featured_article=featured_article)
+    
+    # Load all articles
+    articles = {article['filename']: article for article in load_articles()}
+    
+    return render_template("index.html", featured_article=featured_article, latest_articles=latest_articles, articles=articles)
 
 @app.route('/favicon.ico')
 def favicon():
@@ -40,28 +64,20 @@ def hyperlink_urls(text):
 
 app.jinja_env.filters['hyperlink'] = hyperlink_urls
 
-# def latest_episode_section():
-    
-
 #This allows you to change the image on the main Breaking News article
 @app.route('/breakingnewsimage')
 def breakingnewsimage():
     featured_path = os.path.join('data', 'featured.json')
 
     if os.path.exists(featured_path):
-        print("exists")
         with open(featured_path, 'r') as f:
             featured_article = json.load(f)
             thumbnail_path = featured_article.get('thumbnail')
-            print(thumbnail_path)
             if thumbnail_path and os.path.exists(thumbnail_path):
                 return send_from_directory(app.config['UPLOAD_FOLDER'], os.path.basename(thumbnail_path))
 
     # Fallback to default image if no featured image is set
-    print("Fallback image used")
     return send_from_directory(app.static_folder, "images/middle-finger-emoji-1368x2048-03zmpcju.png")
-
-
 
 @app.route('/submit_article', methods=['POST'])
 def submit_article():
@@ -89,7 +105,6 @@ def submit_article():
         thumbnail.save(thumbnail_path)
         article['thumbnail'] = thumbnail_path.replace('\\', '/')
 
-    
     # Save the article as a JSON file
     filename = title.replace(' ', '-').lower() + '.json'
     with open(os.path.join('data', filename), 'w') as f:
@@ -101,14 +116,17 @@ def submit_article():
     
     return redirect(link)
 
-
 # Code for handling and serving articles
 def load_articles():
     articles = []
     for filename in os.listdir('data'):
+        if filename == "featured.json":
+            continue
         if filename.endswith('.json'):
-            with open(os.path.join('data', filename)) as f:
-                articles.append(json.load(f))
+            with open(os.path.join('data', filename), 'r') as f:
+                article = json.load(f)
+                article['filename'] = filename
+                articles.append(article)
     return articles
 
 @app.route('/article/<string:title>')
@@ -150,7 +168,6 @@ def set_featured():
     shutil.copyfile(source_path, destination_path)
 
     return redirect("/")
-
 
 if __name__ == "__main__":
     app.run(port=666, debug=True)
