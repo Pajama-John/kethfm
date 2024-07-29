@@ -77,13 +77,19 @@
 
         <section class="latest-news">
           <div class="headline" id="headline-div">
-            <p>Breaking News</p>
-            <a href="article/the-h3-podcast-is-back!-with-a-new-look">
-              <h1>The H3 Podcast is Back! With a New Look</h1>
-            </a>
+              <p>Breaking News</p>
+              {% if featured_article %}
+                  <a href="{{ featured_article['link'] }}">
+                      <h1>{{ featured_article['title'] }}</h1>
+                  </a>
+              {% else %}
+                  <a href="article/the-h3-podcast-is-back!-with-a-new-look">
+                      <h1>The H3 Podcast is Back! With a New Look</h1>
+                      <img src="{{ url_for('static', filename='images/h3show1thumbnail.png') }}" alt="Default Image">
+                  </a>
+              {% endif %}
           </div>
-        </section> <!-- End of class="latest-news" -->
-
+      </section> <!-- End of class="latest-news" -->    
         <section class="top-stories">
           <h2>Latest Episode:</h2>
           <div class="headline headline-1">

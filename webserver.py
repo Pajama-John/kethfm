@@ -1,15 +1,25 @@
 from flask import Flask, render_template, send_from_directory, redirect, url_for, request, abort
+from werkzeug.utils import secure_filename
+from datetime import datetime
+
 import os
 import re
 import json
-from werkzeug.utils import secure_filename
+import shutil
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 
 @app.route('/')
 def home():
-    return render_template("index.html")
+    featured_article = None
+    featured_path = os.path.join('data', 'featured.json')
+
+    if os.path.exists(featured_path):
+        with open(featured_path, 'r') as f:
+            featured_article = json.load(f)
+
+    return render_template("index.html", featured_article=featured_article)
 
 @app.route('/favicon.ico')
 def favicon():
@@ -22,6 +32,17 @@ def article1():
 #This allows you to change the image on the main Breaking News article
 @app.route('/breakingnewsimage')
 def breakingnewsimage():
+    featured_path = os.path.join('data', 'featured.json')
+
+    if os.path.exists(featured_path):
+        with open(featured_path, 'r') as f:
+            featured_article = json.load(f)
+            thumbnail_path = featured_article.get('thumbnail')
+            if thumbnail_path and os.path.exists(thumbnail_path):
+                directory, filename = os.path.split(thumbnail_path)
+                return send_from_directory(directory, filename)
+
+    # Fallback to default image if no featured image is set
     return send_from_directory(app.static_folder, "images/h3show1thumbnail.png")
 
 # Generate new article page
@@ -91,6 +112,35 @@ def article(title):
         if article['title'].replace(' ', '-').lower() == title.lower():
             return render_template('article.html', article=article)
     return "Error"
+
+@app.route("/submit-featured")
+def submit_featured():
+    data_folder = 'data'
+    articles = []
+
+    for filename in os.listdir(data_folder):
+        if filename.endswith('.json'):
+            filepath = os.path.join(data_folder, filename)
+            with open(filepath, 'r') as f:
+                article = json.load(f)
+                article['filename'] = filename
+                articles.append(article)
+
+    # Sort articles by date, most recent first
+    articles.sort(key=lambda x: datetime.strptime(x['date'], '%Y-%m-%d'), reverse=True)
+
+    return render_template("featured_form.html", articles=articles)
+
+@app.route("/set-featured", methods=["POST"])
+def set_featured():
+    selected_file = request.form['articles']
+    source_path = os.path.join("data", selected_file)
+    destination_path = os.path.join("data", 'featured.json')
+
+    # Copy the selected file to featured.json
+    shutil.copyfile(source_path, destination_path)
+
+    return redirect("/")
 
 
 if __name__ == "__main__":
