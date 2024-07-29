@@ -40,7 +40,7 @@ def hyperlink_urls(text):
 
 app.jinja_env.filters['hyperlink'] = hyperlink_urls
 
-def latest_episode_section():
+# def latest_episode_section():
     
 
 #This allows you to change the image on the main Breaking News article
