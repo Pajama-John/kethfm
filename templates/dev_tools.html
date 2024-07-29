@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Development Tools</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Development Tools</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Submit Latest Episode
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Submit the latest episode details.</p>
+                        <a href="{{ url_for('latest') }}" class="btn btn-primary">Submit Latest</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Submit New Article
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Create and submit a new article.</p>
+                        <a href="{{ url_for('submit') }}" class="btn btn-primary">Submit Article</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Set Featured Article
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Choose an article to feature on the homepage.</p>
+                        <a href="{{ url_for('submit_featured') }}" class="btn btn-primary">Set Featured</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        View Favicon
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">View the current favicon of the site.</p>
+                        <a href="{{ url_for('favicon') }}" class="btn btn-primary">View Favicon</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Change Breaking News Image
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Change the image for the main Breaking News article.</p>
+                        <a href="{{ url_for('breakingnewsimage') }}" class="btn btn-primary">Change Image</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Home
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">Return to the home page.</p>
+                        <a href="{{ url_for('home') }}" class="btn btn-primary">Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

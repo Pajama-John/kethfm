@@ -169,5 +169,10 @@ def set_featured():
 
     return redirect("/")
 
+@app.route('/dev-tools')
+def dev_tools():
+    return render_template('dev_tools.html')
+
+
 if __name__ == "__main__":
     app.run(port=666, debug=True)

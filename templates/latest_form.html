@@ -3,33 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Set Featured Article</title>
+    <title>Set Latest Articles</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <form action="/set-latest" method="post">
-        <label for="article1">Choose an article:</label><br>
-        <select name="article1" id="article1">
-            {% for article in articles %}
-                <option value="{{ article['filename'] }}">{{ article['title'] }}</option>
-            {% endfor %}
-        </select><br>
+    <div class="container mt-5">
+        <h1 class="mb-4">Set Latest Articles</h1>
+        <form action="/set-latest" method="post">
+            <div class="form-group">
+                <label for="article1">Choose an article:</label>
+                <select class="form-control" name="article1" id="article1">
+                    {% for article in articles %}
+                        <option value="{{ article['filename'] }}">{{ article['title'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="article2">Choose another article:</label>
+                <select class="form-control" name="article2" id="article2">
+                    {% for article in articles %}
+                        <option value="{{ article['filename'] }}">{{ article['title'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <label for="article2">Choose another article:</label><br>
-        <select name="article2" id="article2">
-            {% for article in articles %}
-                <option value="{{ article['filename'] }}">{{ article['title'] }}</option>
-            {% endfor %}
-        </select><br>
+            <div class="form-group">
+                <label for="article3">Choose yet another article:</label>
+                <select class="form-control" name="article3" id="article3">
+                    {% for article in articles %}
+                        <option value="{{ article['filename'] }}">{{ article['title'] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
 
-        <label for="article3">Choose yet another article:</label><br>
-        <select name="article3" id="article3">
-            {% for article in articles %}
-                <option value="{{ article['filename'] }}">{{ article['title'] }}</option>
-            {% endfor %}
-        </select><br>
-
-        <input type="submit" value="Submit">
-    </form>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-a
