@@ -93,7 +93,7 @@ def submit_article():
     thumbnail = request.files.get('thumbnail')  # Use .get to avoid KeyError
     
     # Remove non-alphanumeric characters from the title
-    sanitized_title = re.sub(r'[^a-zA-Z0-9]', '_', title)
+    sanitized_title = re.sub(r'[^a-zA-Z0-9_-]', '_', title)
 
     link = '/article/' + sanitized_title.lower()
 
@@ -141,7 +141,7 @@ def load_articles():
 @app.route('/article/<string:title>')
 def article(title):
     # Sanitize the title to match the filename
-    sanitized_title = re.sub(r'[^a-zA-Z0-9]', '_', title).lower()
+    sanitized_title = re.sub(r'[^a-zA-Z0-9_-]', '_', title).lower()
     filename = sanitized_title + '.json'
     
     filepath = os.path.join('data', filename)
@@ -203,9 +203,24 @@ def edit():
 @app.route('/update', methods=['POST'])
 def update():
     filename = request.form['filename']
+    file_path = os.path.join("data", filename)
+
+    # Load existing data to ensure all fields are preserved
+    with open(file_path, 'r') as file:
+        existing_data = json.load(file)
+
+    # Sanitize new title
+    new_title = request.form['title']
+    sanitized_title = re.sub(r'[^a-zA-Z0-9_-]', '_', new_title).lower()
+    new_link = '/article/' + sanitized_title
+    
     new_data = {
-        'title': request.form['title'],
+        'title': new_title,
+        'link': new_link,
+        'author': existing_data.get('author', ''),
+        'date': existing_data.get('date', ''),
         'content': request.form['content'],
+        'youtube': existing_data.get('youtube', ''),
         'tags': request.form['tags'].split(','),
         'thumbnail': request.form['thumbnail']
     }
@@ -214,16 +229,23 @@ def update():
     if 'thumbnail-file' in request.files:
         file = request.files['thumbnail-file']
         if file.filename != '':
-            thumbnail_path = os.path.join('static/uploads/', file.filename)
+            thumbnail_path = os.path.join('static/uploads', file.filename)
             file.save(thumbnail_path)
             new_data['thumbnail'] = thumbnail_path
 
-    file_path = os.path.join("data", filename)
+    # New filename based on sanitized title
+    new_filename = sanitized_title + '.json'
+    
+    # Delete the old file if the name is changed
+    if filename != new_filename:
+        os.remove(file_path)
+        file_path = os.path.join("data", new_filename)
+
+    # Save new data
     with open(file_path, 'w') as file:
         json.dump(new_data, file, indent=4)
 
-    return redirect(f"/article/{filename[:-5]}")
-
+    return redirect(new_link)
 
 if __name__ == "__main__":
     app.run(port=666, debug=True)
