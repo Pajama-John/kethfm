@@ -77,7 +77,6 @@
         {% elif article.thumbnail %}
             <figure>
                 <img src="{{ url_for('static', filename=article.thumbnail.split('static/')[-1]) }}" alt="Thumbnail Image">
-                <figcaption>{{ article.title }}</figcaption>
             </figure>
         {% else %}
             <figure>
