@@ -78,15 +78,18 @@ def breakingnewsimage():
 
     # Fallback to default image if no featured image is set
     return send_from_directory(app.static_folder, "images/middle-finger-emoji-1368x2048-03zmpcju.png")
-
+from pprint import pprint
 @app.route('/submit_article', methods=['POST'])
 def submit_article():
+    pprint(dict(request.form))
     title = request.form['title']
     author = request.form['author']
     date = request.form['date']
     content = request.form['content']
     youtube = request.form['youtube']
+    tags = [x.strip() for x in request.form['tags'].split(',')]
     thumbnail = request.files.get('thumbnail')  # Use .get to avoid KeyError
+    
     link = '/article/' + title.replace(' ', '-').lower()
 
     article = {
@@ -96,6 +99,7 @@ def submit_article():
         'date': date,
         'content': content,
         'youtube': youtube,
+        'tags': tags,
         'thumbnail': ''
     }
     

@@ -36,8 +36,13 @@
             </div>
             
             <div class="form-group">
-                <label for="thumbnail">Thumbnail Image (optional):</label>
-                <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*">
+                <label for="thumbnail">Thumbnail Image:</label>
+                <input type="file" class="form-control-file" id="thumbnail" name="thumbnail" accept="image/*" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags:</label>
+                <input type="text" class="form-control" id="tags" name="tags" placeholder="Enter tags separated by commas">
             </div>
             
             <button type="submit" class="btn btn-primary">Submit</button>
