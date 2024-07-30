@@ -29,7 +29,7 @@ def set_latest():
     return redirect("/")
 
 @app.route('/')
-def home():
+def index():
     featured_article = None
     featured_path = os.path.join('data', 'featured.json')
 
@@ -198,7 +198,7 @@ def edit():
         with open(os.path.join("data", selected_file), 'r') as file:
             json_data = json.load(file)
 
-    return render_template('index.html', files=files, json_data=json_data, selected_file=selected_file)
+    return render_template('edit.html', files=files, json_data=json_data, selected_file=selected_file)
 
 @app.route('/update', methods=['POST'])
 def update():
@@ -214,7 +214,7 @@ def update():
     if 'thumbnail-file' in request.files:
         file = request.files['thumbnail-file']
         if file.filename != '':
-            thumbnail_path = os.path.join('static/uploads', file.filename)
+            thumbnail_path = os.path.join('static/uploads/', file.filename)
             file.save(thumbnail_path)
             new_data['thumbnail'] = thumbnail_path
 
@@ -222,7 +222,7 @@ def update():
     with open(file_path, 'w') as file:
         json.dump(new_data, file, indent=4)
 
-    return redirect(url_for('index'))
+    return redirect(f"/article/{filename[:-5]}")
 
 
 if __name__ == "__main__":
