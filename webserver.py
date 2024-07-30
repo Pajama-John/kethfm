@@ -229,7 +229,7 @@ def update():
     if 'thumbnail-file' in request.files:
         file = request.files['thumbnail-file']
         if file.filename != '':
-            thumbnail_path = os.path.join('static/uploads', file.filename)
+            thumbnail_path = os.path.join('static/uploads/', file.filename)
             file.save(thumbnail_path)
             new_data['thumbnail'] = thumbnail_path
 
