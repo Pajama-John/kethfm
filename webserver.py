@@ -78,7 +78,9 @@ def breakingnewsimage():
 
     # Fallback to default image if no featured image is set
     return send_from_directory(app.static_folder, "images/middle-finger-emoji-1368x2048-03zmpcju.png")
+
 from pprint import pprint
+
 @app.route('/submit_article', methods=['POST'])
 def submit_article():
     pprint(dict(request.form))
@@ -90,7 +92,10 @@ def submit_article():
     tags = [x.strip() for x in request.form['tags'].split(',')]
     thumbnail = request.files.get('thumbnail')  # Use .get to avoid KeyError
     
-    link = '/article/' + title.replace(' ', '-').lower()
+    # Remove non-alphanumeric characters from the title
+    sanitized_title = re.sub(r'[^a-zA-Z0-9]', '_', title)
+
+    link = '/article/' + sanitized_title.lower()
 
     article = {
         'title': title,
@@ -110,7 +115,7 @@ def submit_article():
         article['thumbnail'] = thumbnail_path.replace('\\', '/')
 
     # Save the article as a JSON file
-    filename = title.replace(' ', '-').lower() + '.json'
+    filename = sanitized_title.lower() + '.json'
     with open(os.path.join('data', filename), 'w') as f:
         json.dump(article, f)
     
@@ -135,11 +140,16 @@ def load_articles():
 
 @app.route('/article/<string:title>')
 def article(title):
-    articles = load_articles()
-
-    for article in articles:
-        if article['title'].replace(' ', '-').lower() == title.lower():
+    # Sanitize the title to match the filename
+    sanitized_title = re.sub(r'[^a-zA-Z0-9]', '_', title).lower()
+    filename = sanitized_title + '.json'
+    
+    filepath = os.path.join('data', filename)
+    if os.path.exists(filepath):
+        with open(filepath, 'r') as f:
+            article = json.load(f)
             return render_template('article.html', article=article)
+    
     return "Error"
 
 @app.route("/submit-featured")
@@ -176,6 +186,43 @@ def set_featured():
 @app.route('/dev-tools')
 def dev_tools():
     return render_template('dev_tools.html')
+
+@app.route('/edit', methods=['GET', 'POST'])
+def edit():
+    files = [f for f in os.listdir("data") if f.endswith('.json') and f != 'featured.json']
+    json_data = None
+    selected_file = None
+
+    if request.method == 'POST' and 'file' in request.form:
+        selected_file = request.form['file']
+        with open(os.path.join("data", selected_file), 'r') as file:
+            json_data = json.load(file)
+
+    return render_template('index.html', files=files, json_data=json_data, selected_file=selected_file)
+
+@app.route('/update', methods=['POST'])
+def update():
+    filename = request.form['filename']
+    new_data = {
+        'title': request.form['title'],
+        'content': request.form['content'],
+        'tags': request.form['tags'].split(','),
+        'thumbnail': request.form['thumbnail']
+    }
+
+    # Handle thumbnail file upload
+    if 'thumbnail-file' in request.files:
+        file = request.files['thumbnail-file']
+        if file.filename != '':
+            thumbnail_path = os.path.join('static/uploads', file.filename)
+            file.save(thumbnail_path)
+            new_data['thumbnail'] = thumbnail_path
+
+    file_path = os.path.join("data", filename)
+    with open(file_path, 'w') as file:
+        json.dump(new_data, file, indent=4)
+
+    return redirect(url_for('index'))
 
 
 if __name__ == "__main__":

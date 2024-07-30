@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit JSON</title>
+</head>
+<body>
+    <h1>Edit JSON File</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="file-select">Select a file:</label>
+        <select name="file" id="file-select">
+            {% for file in files %}
+            <option value="{{ file }}">{{ file }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Load</button>
+    </form>
+    
+    {% if json_data %}
+    <form method="POST" enctype="multipart/form-data" action="/update">
+        <input type="hidden" name="filename" value="{{ selected_file }}">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="{{ json_data['title'] }}"><br>
+        <label for="content">Content:</label><br>
+        <textarea id="content" name="content">{{ json_data['content'] }}</textarea><br>
+        <label for="tags">Tags (comma-separated):</label><br>
+        <input type="text" id="tags" name="tags" value="{{ ','.join(json_data['tags']) }}"><br>
+        <label for="thumbnail">Thumbnail:</label><br>
+        <input type="text" id="thumbnail" name="thumbnail" value="{{ json_data['thumbnail'] }}"><br>
+        <label for="thumbnail-file">Upload new thumbnail:</label><br>
+        <input type="file" id="thumbnail-file" name="thumbnail-file"><br><br>
+        <button type="submit">Save Changes</button>
+    </form>
+    {% endif %}
+</body>
+</html>
