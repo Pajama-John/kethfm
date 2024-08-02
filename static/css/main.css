@@ -64,12 +64,20 @@ html {
   box-sizing: inherit;
 }
 
+@font-face {
+  font-family: 'FCM';
+  src: url('/static/fonts/fcm.ttf') format('truetype');
+}
+
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'FCM', sans-serif;
 }
 
 h1,
-h2,
+h2 {
+  font-family: 'FCM', sans-serif;
+}
+
 h3,
 h4,
 h5,
