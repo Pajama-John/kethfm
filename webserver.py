@@ -16,6 +16,28 @@ def latest_episode_section():
         latest = pickle.load(f)
     return latest
 
+@app.route('/search')
+def search():
+    tags = request.args.get('tags')
+    if not tags:
+        return abort(400, description="Tags parameter is required")
+
+    # Split tags by comma and convert to lowercase
+    tag_list = [tag.strip().lower() for tag in tags.split(',')]
+
+    # Load all articles
+    articles = load_articles()
+
+    # Filter articles by tags (case-insensitive)
+    matching_articles = []
+    for article in articles:
+        article_tags = [t.lower() for t in article['tags']]
+        if all(tag in article_tags for tag in tag_list):
+            matching_articles.append(article)
+
+    return render_template('search_results.html', tags=tag_list, articles=matching_articles)
+
+
 @app.route('/submit-latest')
 def latest():
     articles = load_articles()
@@ -79,7 +101,13 @@ def breakingnewsimage():
     # Fallback to default image if no featured image is set
     return send_from_directory(app.static_folder, "images/middle-finger-emoji-1368x2048-03zmpcju.png")
 
-from pprint import pprint
+def get_meta_description(content, length=160):
+    # Remove any HTML tags from the content
+    text = re.sub('<[^<]+?>', '', content)
+    # Return the first 'length' characters
+    return text[:length] + '...' if len(text) > length else text
+
+app.jinja_env.globals.update(get_meta_description=get_meta_description)
 
 @app.route('/submit_article', methods=['POST'])
 def submit_article():

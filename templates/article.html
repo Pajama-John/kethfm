@@ -5,8 +5,7 @@
 
   <meta charset="UTF-8">
   <meta name="description"
-    content="The latest international news from Frivizn, featuring top stories from around the world and breaking news, as it happens.">
-  <meta name="author" content="dukibu">
+    content="{{ get_meta_description(article.content) }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>{{ article.title }}</title>
@@ -214,7 +213,7 @@
 
     <!-- Footer Credit -->
     <footer role="contentinfo">
-      <p>2019 &copy; by Frivizn Studio</p>
+      <p>2024 &copy;</p>
       <a class="scroll-top" href="#top"></a>
     </footer>
 

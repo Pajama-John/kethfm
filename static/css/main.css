@@ -510,15 +510,15 @@ p.intro-text {
 
 input[type='text'],
 textarea {
-  width: 100%;
+  width: 70%;
   padding: 12px;
   border: 1px solid var(--smoky-black);
-  background: transparent;
+  background: hsl(274.63deg 54.63% 73.97%);
   color: var(--smoky-black);
   border-radius: 4px;
   box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
+  margin-top: 0;
+  margin-bottom: 0;
   resize: vertical;
 }
 
@@ -607,7 +607,7 @@ input[type='submit'] {
 
   .top-stories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .top-stories h2 {
@@ -782,6 +782,7 @@ input[type='submit'] {
 
   .main-article .article {
     font-size: 1.2rem;
+    padding-left: 2%;
   }
 
   /*
@@ -790,7 +791,6 @@ input[type='submit'] {
 
   .article h2 {
     font-size: 2rem;
-    padding-top: 40px;
     padding-bottom: 10px;
     padding-left: 0;
   }

@@ -1,0 +1,123 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description"
+    content="The latest international news from Frivizn, featuring top stories from around the world and breaking news, as it happens.">
+  <meta name="author" content="dukibu">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <link rel="icon" href="/static/images/favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:400,700|Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <style>
+    .search-results {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+    .search-result {
+      display: flex;
+      align-items: flex-start;
+      margin-left: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .search-result img {
+      max-width: 150px;
+      max-height: 100px;
+      margin-right: 20px;
+    }
+    .search-result-content {
+      flex: 1;
+    }
+    .search-result h1 {
+      font-size: 1.5em;
+      margin: 0;
+    }
+    .search-result p {
+      margin: 5px 0;
+    }
+    .search-result .metadata {
+      font-size: 0.9em;
+      color: #777;
+    }
+  </style>
+</head>
+
+<body id="top">
+  <div class="content-wrap">
+    <header role="banner">
+      <section class="nav-section">
+        <!-- Logo -->
+        <div class="logo">
+          <a href="/dev-tools" title="Watch the H3 Show!"><img style="max-height: 150px" src="/static/images/KETHLOGO.png" /></a>
+        </div>
+        <!-- Navigation -->
+        <nav class="nav-menu" role="navigation">
+          <ul class="nav-links">
+            <li><a href="/" title="Drama">Drama</a></li>
+            <li><a href="/article" title="Goofs">Goofs</a></li>
+            <li><a href="#politics" title="World News">World News</a></li>
+            <li><a href="#business" title="Topics">Topics</a></li>
+            <li><a href="#sport" title="Archive">Archive</a></li>
+            <li><a href="#entertainment" title="About Us">About Us</a></li>
+            <li>
+              <a href="#more" title="More">More...<span class="dropdown-toggle" aria-expanded="false"></span>
+                <span class="screen-reader-text">Expand child menu</span></a>
+              <ul class="sub-menu">
+                <li><a href="#" title="Videos">Videos</a></li>
+                <li><a href="#" title="KavKav">KavKav</a></li>
+                <li><a href="#" title="Jimmie Lee">Jimmie Lee</a></li>
+                <li><a href="#" title="Keem">Keem</a></li>
+                <li><a href="#" title="Cody Ko">Cody Ko</a></li>
+                <li><a href="#" title="Donate">Donate</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="burger">
+            <div class="line-1"></div>
+            <div class="line-2"></div>
+            <div class="line-3"></div>
+          </div>
+        </nav>
+      </section>
+    </header>
+    <!-- Main -->
+    <main class="main" role="main">
+      <div class="top-news">
+        <section class="top-stories">
+        <h1 style="margin-left: 15px;">Search Results for "{{ tags | join(', ') }}"</h1>
+          {% if articles %}
+            <ul style="margin-left: 5px;" class="search-results">
+              {% for article in articles %}
+                <li class="search-result">
+                  <img src="{{ article.thumbnail }}" alt="Thumbnail">
+                  <div class="search-result-content">
+                    <h1><a href="{{ article.link }}">{{ article.title }}</a></h1>
+                    <p>{{ article.content | truncate(150) }}</p>
+                    <p class="metadata">By {{ article.author }} on {{ article.date }}</p>
+                  </div>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p style="margin-left: 20px;">No articles found with the tags "{{ tags | join(', ') }}".</p>
+          {% endif %}
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>&copy; 2024. All rights reserved.</p>
+    </footer>
+  </div>
+  <script src="/static/js/main.js"></script>
+</body>
+
+</html>
